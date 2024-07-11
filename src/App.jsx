@@ -1,6 +1,7 @@
 import React from "react";
 import { Box, Text, useColorModeValue } from "@chakra-ui/react";
 import Navbar from "./components/common/Navbar";
+import TimeZoneConverter from "./components/time-convertor/TimeZoneConverter";
 
 function App() {
   return (
@@ -13,8 +14,9 @@ function App() {
         color={useColorModeValue("black", "white")}
         mt={4}
       >
-        TimeZone Convertor and Scheduler
+        TimeZone Converter and Scheduler
       </Text>
+      <TimeZoneConverter />
     </Box>
   );
 }
