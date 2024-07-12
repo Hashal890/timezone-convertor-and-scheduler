@@ -52,11 +52,13 @@ bun start
 
 ## Technologies used
 
-- [React.js](https://react.dev/learn/installation)
 - [JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
-- [Chakra-UI](https://v2.chakra-ui.com/getting-started)
+- [React.js](https://react.dev/learn/installation)
+- [Moment.js](https://momentjs.com/)
+- [React Select](https://www.npmjs.com/package/react-select)
 - [React Datepicker](https://www.npmjs.com/package/react-datepicker)
-- [React Beautiful Dnd](https://www.npmjs.com/package/react-beautiful-dnd)
+- [Hello Pangea Dnd](https://www.npmjs.com/package/@hello-pangea/dnd)
+- [Chakra-UI](https://v2.chakra-ui.com/getting-started)
 - [React Icons](https://react-icons.github.io/react-icons/)
 - [CSS](https://developer.mozilla.org/en-US/docs/Web/CSS)
 - [HTML](https://developer.mozilla.org/en-US/docs/Web/HTML)
