@@ -5,6 +5,7 @@ import TimezoneSearchAndSelect from "./TimezoneSearchAndSelect";
 import { INIT_FORMATTED_TIME_ZONES } from "../../../assets/data";
 import DatePicker from "./DatePicker";
 import ScheduleMeetButton from "./ScheduleMeetButton";
+import TimezoneSlider from "./TimezoneSlider";
 
 const ConverterSection = () => {
   const [timezones, setTimezones] = useState(INIT_FORMATTED_TIME_ZONES);
@@ -26,6 +27,10 @@ const ConverterSection = () => {
     setTimezones([...timezones].reverse());
   };
 
+  const handleSliderChange = (value) => {
+    setTime(moment.utc().startOf("day").add(value, "hours").toDate());
+  };
+
   return (
     <Box>
       <TimezoneSearchAndSelect onSelect={handleTimezoneSelect} />
@@ -41,14 +46,15 @@ const ConverterSection = () => {
           selectedDate={selectedDate}
           handleDateAndTimeChange={handleDateAndTimeChange}
         />
-        <Button
-          onClick={handleReverseOrder}
-          colorScheme={"linkedin"}
-        >
+        <Button onClick={handleReverseOrder} colorScheme={"linkedin"}>
           Reverse Order
         </Button>
         <ScheduleMeetButton time={time} />
       </Flex>
+      <TimezoneSlider
+        value={moment.utc(time).hours()}
+        onChange={handleSliderChange}
+      />
     </Box>
   );
 };
