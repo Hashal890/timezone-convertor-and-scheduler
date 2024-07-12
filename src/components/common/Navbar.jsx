@@ -15,7 +15,7 @@ const Navbar = () => {
       zIndex={10000}
     >
       <Box fontSize={["12px", "12px", "14px"]}>
-        TimeZone Convertor and Scheduler
+        TZCS
       </Box>
       <ToggleColorMode />
     </Flex>

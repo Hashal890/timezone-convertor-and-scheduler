@@ -6,7 +6,7 @@ const ScheduleMeetButton = ({ time }) => {
   const scheduleMeet = () => {
     const startTime = moment(time).utc().format("YYYYMMDDTHHmmss") + "Z";
     const endTime =
-      moment(time).add(1, "hours").utc().format("YYYYMMDDTHHmmss") + "Z";
+      moment(time).add(2, "hours").utc().format("YYYYMMDDTHHmmss") + "Z";
 
     const meetUrl = `https://calendar.google.com/calendar/u/0/r/eventedit?dates=${startTime}/${endTime}`;
 
@@ -14,7 +14,13 @@ const ScheduleMeetButton = ({ time }) => {
   };
 
   return (
-    <Button onClick={scheduleMeet} colorScheme={"linkedin"}>
+    <Button
+      onClick={scheduleMeet}
+      colorScheme={"linkedin"}
+      border={"2px solid #2f59ff"}
+      p={"22px"}
+      fontWeight={400}
+    >
       Schedule Meet
     </Button>
   );

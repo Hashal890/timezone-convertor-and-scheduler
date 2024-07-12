@@ -9,10 +9,11 @@ function App() {
       <Navbar />
       <Text
         textAlign={"center"}
-        fontWeight={800}
-        fontSize={25}
+        fontWeight={600}
+        fontSize={[18, 16, 25]}
         color={useColorModeValue("black", "white")}
         mt={24}
+        mb={[6, 6, 12]}
       >
         TimeZone Converter and Scheduler
       </Text>

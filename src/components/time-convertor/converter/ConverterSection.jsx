@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Box, Button, Flex } from "@chakra-ui/react";
 import moment from "moment";
 import TimezoneSearchAndSelect from "./TimezoneSearchAndSelect";
@@ -6,15 +6,22 @@ import { INIT_FORMATTED_TIME_ZONES } from "../../../assets/data";
 import DatePicker from "./DatePicker";
 import ScheduleMeetButton from "./ScheduleMeetButton";
 import TimezoneSlider from "./TimezoneSlider";
+import TimezoneList from "./TimezoneList";
 
 const ConverterSection = () => {
   const [timezones, setTimezones] = useState(INIT_FORMATTED_TIME_ZONES);
   const [selectedDate, setSelectedDate] = useState(moment.utc().toDate());
   const [time, setTime] = useState(moment.utc().toDate());
 
+  const newLocalStorageTimezones = (newTimeZones) => {
+    localStorage.setItem("FORMATTED_TIME_ZONES", JSON.stringify(newTimeZones));
+  };
+
   const handleTimezoneSelect = (timezone) => {
     if (!timezones.find((tz) => tz.value === timezone.value)) {
-      setTimezones([...timezones, timezone]);
+      const newTimeZones = [...timezones, timezone];
+      newLocalStorageTimezones(newTimeZones);
+      setTimezones(newTimeZones);
     }
   };
 
@@ -24,12 +31,44 @@ const ConverterSection = () => {
   };
 
   const handleReverseOrder = () => {
-    setTimezones([...timezones].reverse());
+    const newTimeZones = [...timezones].reverse();
+    newLocalStorageTimezones(newTimeZones);
+    setTimezones(newTimeZones);
   };
 
   const handleSliderChange = (value) => {
     setTime(moment.utc().startOf("day").add(value, "hours").toDate());
   };
+
+  const handleRemoveTimezone = (value) => {
+    const newTimeZones = timezones.filter((tz) => tz.value !== value);
+    newLocalStorageTimezones(newTimeZones);
+    setTimezones(newTimeZones);
+  };
+
+  const handleReorderTimezones = (reorderedTimezones) => {
+    setTimezones(reorderedTimezones);
+  };
+
+  useEffect(() => {
+    try {
+      const localStorageTimeZones = localStorage.getItem(
+        "FORMATTED_TIME_ZONES"
+      );
+      const jsonFormattedTimeZones = localStorageTimeZones
+        ? JSON.parse(localStorageTimeZones)
+        : false;
+      if (jsonFormattedTimeZones) {
+        setTimezones(jsonFormattedTimeZones);
+      } else {
+        newLocalStorageTimezones(INIT_FORMATTED_TIME_ZONES);
+        setTimezones(INIT_FORMATTED_TIME_ZONES);
+      }
+    } catch (error) {
+      newLocalStorageTimezones(INIT_FORMATTED_TIME_ZONES);
+      setTimezones(INIT_FORMATTED_TIME_ZONES);
+    }
+  }, []);
 
   return (
     <Box>
@@ -42,18 +81,30 @@ const ConverterSection = () => {
         flexDir={["column", "row"]}
         gap={4}
       >
+        <Button
+          onClick={handleReverseOrder}
+          colorScheme={"linkedin"}
+          border={"2px solid #2f59ff"}
+          p={"22px"}
+          fontWeight={400}
+        >
+          Reverse Order
+        </Button>
         <DatePicker
           selectedDate={selectedDate}
           handleDateAndTimeChange={handleDateAndTimeChange}
         />
-        <Button onClick={handleReverseOrder} colorScheme={"linkedin"}>
-          Reverse Order
-        </Button>
         <ScheduleMeetButton time={time} />
       </Flex>
       <TimezoneSlider
         value={moment.utc(time).hours()}
         onChange={handleSliderChange}
+      />
+      <TimezoneList
+        timezones={timezones}
+        time={time}
+        onRemove={handleRemoveTimezone}
+        onReorder={handleReorderTimezones}
       />
     </Box>
   );
