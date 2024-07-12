@@ -12,7 +12,7 @@ function App() {
         fontWeight={800}
         fontSize={25}
         color={useColorModeValue("black", "white")}
-        mt={4}
+        mt={24}
       >
         TimeZone Converter and Scheduler
       </Text>
