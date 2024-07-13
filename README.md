@@ -164,4 +164,4 @@ bun start
 
 **Video Overview:**
 
-<video src="./src/assets/project-overview.mp4" controls fullscreen></video>
+[View Video](https://drive.google.com/file/d/1FHE58HdQP0wHQO9eSHANrUP-xos2DSnY/view)
