@@ -5,7 +5,7 @@ import TimeZoneConverter from "./components/time-convertor/TimeZoneConverter";
 
 function App() {
   return (
-    <Box fontFamily={"cursive"}>
+    <Box>
       <Navbar />
       <Text
         textAlign={"center"}
